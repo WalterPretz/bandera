@@ -36,15 +36,14 @@ const paises = [
         moneda: "Lempira"
     }
 ];
-let botonAgregar = document.getElementById('botonAgregar');
+
 let botonMostrar = document.getElementById('mostrarPaises');
-let modalPais = document.getElementById('agregarBanderaModal');
 let botonRegistrar = document.getElementById('guardaRegistro');
 
 agregarMonitores();
 //funcion para agregar listeners a los botones
 function agregarMonitores() {
-    botonRegistrar.addEventListener("click", function(){validar();});
+    botonRegistrar.addEventListener("click", function(){agregarPais();});
     botonMostrar.addEventListener("click", function(){mostrarPaises();});
 }
 
@@ -85,9 +84,6 @@ function mostrarPaises() {
 
 //funcion que permite agregar un pais al arreglo
 function agregarPais() {
-}
-
-    function validar(){
     let nombrePais = document.getElementById('nombrePais').value;
     let capitalPais = document.getElementById('capitalPais').value;
     let idiomaPais = document.getElementById('idiomaPais').value;
@@ -99,7 +95,7 @@ function agregarPais() {
     let idioma = idiomaPais.length;
     let moneda = monedaPais;
     let bandera = banderaPais;
-    console.log(country);
+
     if(country < 4){
         Swal.fire(
             'Opps',
@@ -118,7 +114,7 @@ function agregarPais() {
             'Ingresar el idioma del pais',
             'error'
         )
-    }else if(moneda < 4){
+    }else if(moneda < 3){
         Swal.fire(
             'Opps',
             'Ingresar el moneda del pais',
@@ -136,8 +132,16 @@ function agregarPais() {
             'Se ha registrado exitosamente',
             'success'
         );
-        
-        //limpiarCampos();
+
+        let datoIngresado = {
+            nombre: nombrePais,
+            bandera: banderaPais,
+            capital: capitalPais,
+            idioma_oficial: idiomaPais,
+            moneda: monedaPais,
+        }
+        paises.unshift(datoIngresado);
+        limpiarCampos();
     }
 }
 
